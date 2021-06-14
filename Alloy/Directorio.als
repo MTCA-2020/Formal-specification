@@ -1,35 +1,29 @@
-sig Name {}
-sig Inn {}
-sig Out{}
+sig Persona {}
+sig Telefono {}
 
-sig Registro {
-usuarios: set Name,
-dentro: usuarios -> lone Inn,
-afuera: usuarios -> lone Out
+sig Directorio {
+persona: set Persona,
+dir: persona -> one Telefono
 }
 
-pred AddDentro [r, r': Registro, n: Name, d: Inn] {
-
-      r'.dentro = r.dentro ++ (n->d)
+pred añandeEntrada [b, b': Directorio, n: Persona, d: Telefono] {
+b'.dir = b.dir ++ (n->d)
 }
 
-run AddDentro for 1
+run añadeEntrada
 
-pred DelDentro[r, r': Registro, n: Name, d: Inn]{
-r'.afuera = r.afuera - (n->Out)
+pred borraEntrada [b, b': Directorio, n: Persona] {
+b'.dir  = b.dir - (n->Telefono)
 }
 
-run DelDentro for 1
+run borraEntada
 
-pred AddAfuera [r, r': Registro, n: Name, d: Out] {
-
-r'.afuera = r.afuera ++ (n->d)
+assert quitarDirectorio{
+all bb1,bb2,bb3: Directorio,
+n: Persona, d: Telefono|
+añandeEntrada [bb1,bb2,n,d] && borraEntrada [bb2,bb3,n]
+=> bb1.dir = bb3.dir
 }
 
-run AddAfuera for 1
 
-pred DelAfuera[r, r': Registro, n: Name, d: Out]{
-   r'.dentro = r.dentro - (n->Inn)
-}
-
-run DelAfuera for 1
+check DelIsUndo for 3 but 2 Directorio
