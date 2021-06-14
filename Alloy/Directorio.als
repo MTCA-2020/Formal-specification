@@ -10,13 +10,13 @@ pred añandeEntrada [b, b': Directorio, n: Persona, d: Telefono] {
 b'.dir = b.dir ++ (n->d)
 }
 
-run añadeEntrada
+run añandeEntrada
 
 pred borraEntrada [b, b': Directorio, n: Persona] {
 b'.dir  = b.dir - (n->Telefono)
 }
 
-run borraEntada
+run borraEntrada
 
 assert quitarDirectorio{
 all bb1,bb2,bb3: Directorio,
@@ -26,4 +26,5 @@ añandeEntrada [bb1,bb2,n,d] && borraEntrada [bb2,bb3,n]
 }
 
 
-check DelIsUndo for 3 but 2 Directorio
+check quitarDirectorio for 3 but 2 Directorio
+
