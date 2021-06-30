@@ -1,0 +1,11 @@
+---- MODULE registro ----
+VARIABLE usuarios = {}
+VARIABLE adentro = {}
+VARIABLE afuera = {}
+
+registrarEntrada(nombre) == IF nombre \notin adentro
+                                /\ nombre \notin afuera
+                            THEN nombre = adentro
+consultarAfuera == afuera
+
+consultarAdentro == adentro
