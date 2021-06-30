@@ -1,0 +1,111 @@
+Métodos Formales con Pomela y Spin, VDM y TLA +
+Jose David Barrita López#1
+#,Universidad Tecnologica de la Mixteca
+Hujuapan de Leon, Oaxaca, Mexico 
+1davidbarrita.db@utm.gs.mx 
+
+
+Abstract—  La presente investigación tiene como objetivo conocer 
+los métodos formales como Pomela y Spin, VDM y TLA + donde se realice una comparativa entre ellos, y posteriormente seleccionar uno para realizar los siguientes ejemplos Contador, Registro, Directorio, BirhdayBook y entrega de tareas, actualmente los métodos formales son utilizados en empresas como Amazon, Microsoft, Tesla entre otros[1]. Se resalta la importancia de los métodos formales en la ingeniería de software  y en específico en sistemas de altos impacto. 
+
+Keywords— Metodos formales
+Introducción
+Para abordar los métodos formales introduciendo el lenguaje Z, cuando se aborda la especificación se trata de dos partes importantes la herramienta que permita escribir la sintaxis y la comprobación por medio de teoría matemática tal caso pueden ser los teoremas aplicados sobre la teoría de conjuntos, dado que la mayoría de estos lenguajes tienen como fundamento la teoría de conjuntos, donde por medio del concepto de relación trabajan, claro ejemplo es el lenguaje alloy.A lo largo del ciclo de desarrollo de software hay dos partes medulares donde se aplican los métodos formales, la primera es la especificación de requerimientos y la otra en las pruebas de software, sin embargo como mencionan Jim Wood Cock, Peter Gorm Larsen y Juan Bicarregui, John Fitzegerld “Los métodos formales utilizan modelos matemáticos para el análisis y la verificación en cualquier parte del ciclo de vida del programa”[2]
+Promela 
+Por sus siglas en ingles Protocol Meta Language promela es un lenguaje de modelado de verificación. Los modelos de promela se pueden verificar por medio de su herramienta SPIN, la cual fue desarrollada en el lenguaje de programación C. 
+El modelo promela consiste en: 
+type declarations
+channel  declarations
+
+variable declarations
+process declarations
+[init process]
+
+Como se compone un proceso, se define mediante una definición de tipo de proceso, son capaces de ejecutarse simultáneamente, se comunica con otros procesos, utiliza variables globales, utilización de canales, con tenido de las variables locales. 
+
+
+Figura 1, Hola mudo promela
+
+Para entender el ejemplo se debe entender que hay dos funciones una función que dispara la ación y la otra que la ejecuta, si se piensa como programador en C, init es el método main, por lo tanto el resultado es mostrar primero el prinft, dentro de init, y después se llama a Hello. 
+
+Es importante mostrar que promela tiene un parecido con C, por lo tonta se abordaran ejemplos para hacer una comparativa y así tener un mayor un conocimiento sobre promela. 
+
+Ejemplo en C: 
+struct node{ int value; }
+
+Ejemplo en promela: 
+typedef node{ int value; }
+Condicional: 
+En c se tiene el siguiente ejemplo donde se tiene una operación ternaria.
+a = (b > c) ? b : c; 
+En promela  se especificaría de la siguiente manera: 
+if :: (b > c) -> a = b :: else -> a = c 
+
+Ciclo: 
+while(1){ if(a>b) break; else a++; }
+
+do :: (a>b) -> break :: else -> a++ od
+ 
+Ejemplo de contador en promela: 
+int ctr  = 0; 
+int max =  0; 
+
+if::(0 < ctr && ctr < max )-> ctr = ctr++ ::else ctr = ctr
+
+Otro ejemplo aportado de la clase CS 5219 es el siguiente: 
+byte count; 
+protype counter()
+{
+do 
+  :: count = count + 1
+  ::count = count - 1 
+  ::(count== 0)->break
+  od;
+}
+
+
+Spin es una herramienta que permite analizar la lógica de los sistemas denominados concurrentes.
+ cuando se trata de sistemas distribuidos, los lenguajes de especificación formal juegan un papel importante para su verificación, lo cual permite tener la certeza matemática. 
+ 
+Vienna Development Method (VDM)
+
+VDM es un método formal desarrollado por el laboratorio de IBM en Viena alrededor de la década de 1970, siendo este uno de los más antiguos, su funcionamiento es que a través de tipos construidos utilizando constructores se definen datos estructurados y colecciones como conjuntos, secuencias y mapeos a partir de valores básicos como booleanos y números, lo cual permitirá agregar precondiciones y poscondicciónes. Hay tres variantes de VDM, las cuales son: VDM-SL, VDM++, VDM-RT.
+
+Se considera explicar como de VDM se puede pasar al lenguaje Java, por lo tanto:
+En Java se declara una constante de la siguiente manera:
+public static final int MAX 10;
+En VDM se declararia de la siguiente manera:
+MAX : 10 
+En caso de que la variable fuera vacia y de tipo entera seria de la siguiente manera: 
+temp : Z 
+
+Ahora se mostrará el ejemplo del contador, tomado del libro de VDM to Java
+
+
+
+
+
+
+
+
+
+
+Como se pueden observar las precondiciones y las precondiciones son fáciles de entender. 
+
+
+Comparativa entre PROMELA,VMD, TLA+
+
+ Para abordar estos se deben conocer que lenguaje actualmente es utilizado por grandes empresas, en el cual destaca TLA+ que empresas como amazon, microsoft, intel, compact lo utilizan para el desarrollo de sistemas distribuidos, al saber que las empresas más grandes de la nube lo están usando, nos da un principio de que lenguaje es el que tiene un mayor impacto en la actualidad, sin embargo los otros lenguajes permiten realizar la especificación, pero TLA+ es más eficiente y actualmente está disponible como extensión de visual studio. Por lo cual los ejercicios básicos se desarrollaran con dicho lenguaje.
+
+TLA+
+ Es un lenguaje de especificación y verificación el cual funge como ayuda a los ingenieros a diseñar, especificar, razonar y verificar algoritmos de sistemas de software o hardware complejos de la vida real.  Hay otros lenguajes de especificación que trabajan en conjunto con los lenguajes de programación ejemplo es Java Modeling Lenguage JML que es un lenguaje para verificar código en Java. 
+Se presenta un ejemplo básico: 
+En la imagen se puede observar la logica que se utiliza para hacer un semaforo.
+
+
+
+
+
+El verificador encuentra dos errores el cual uno es la descripción, es el siguiente: 
+TLA+ spec in file semaforo:
+java.lang.NullPointerException: Cannot invoke "String.length()" because "str" is null
