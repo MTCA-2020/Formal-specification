@@ -1,0 +1,10 @@
+---- MODULE directorio ----
+VARIABLE persona
+VARIABLE telefono
+DOMAIN <<"David">> = {9514044777}
+
+agregarEntrada(nombre, telefono)
+                    [<<nombre>>, telefono]
+obtenerTelefonos == DOMAIN {}
+borrarEntrada(nombre, telefono) ==  [<<nombre>>, telefono]  
+                                    / [<<nombre>>, telefono]
